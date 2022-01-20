@@ -17,9 +17,9 @@ router.post('/createuser',[
     {
       return res.status(400).json({ errors: errors.array() });  
     }
-    
+
     //Check user with this email already exists or not
-    let user = User.findOne({email: req.body.email});
+    let user = await User.findOne({email: req.body.email});
     if(user){
       return res.status(400).json({error: "A user with this email already exists."})
     }
@@ -32,7 +32,8 @@ router.post('/createuser',[
     // .then(user => res.json(user))
     // .catch(err => {console.log(err)
     // res.json({error: "Please enter a unique value"})});
-
+    
+    res.json(req.body);
   })
 
   module.exports = router;

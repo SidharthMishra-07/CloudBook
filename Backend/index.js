@@ -5,11 +5,11 @@ connectToMongo();
 
 //Taken from express.js official website 'hello world'
 const app = express()
-const port = 3000
+const port = 5000
 
 app.use(express.json());
 
-//Available Routes
+//Available Routes (Linked routes from routes folder)
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/notes', require('./routes/notes'));
 
