@@ -2,6 +2,8 @@ const express = require('express');
 const User = require('../models/User');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');  //using express-validator
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 //Create a User using POST "/api/auth/createuser". No Login Required
 //Taken from https://express-validator.github.io/docs/
@@ -17,6 +19,10 @@ router.post('/createuser',[
     {
       return res.status(400).json({ errors: errors.array() });  
     }
+    
+    //Using bcrypt.js hashing
+    const salt = await bcrypt.genSalt(10);
+    secPass = await bcrypt.hash(req.body.password, salt);
 
     //Check user with this email already exists or not
     try {
@@ -28,8 +34,9 @@ router.post('/createuser',[
     user = await User.create({
       username: req.body.username,
       email: req.body.email,
-      password: req.body.password,
+      password: secPass,
     })
+    
     res.json(user);
       
     } catch (error) {
