@@ -5,6 +5,8 @@ const { body, validationResult } = require('express-validator');  //using expres
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const JWT_SECRET = 'yoloforReal';
+
 //Create a User using POST "/api/auth/createuser". No Login Required
 //Taken from https://express-validator.github.io/docs/
 router.post('/createuser',[
@@ -36,8 +38,15 @@ router.post('/createuser',[
       email: req.body.email,
       password: secPass,
     })
-    
-    res.json(user);
+
+    const data = {
+      userdata:{
+        id: user.id,
+      }
+    }
+    const authtoken = jwt.sign(data, JWT_SECRET);  //JWT authtoken
+
+    res.json({authtoken});
       
     } catch (error) {
       console.error(error.message);
