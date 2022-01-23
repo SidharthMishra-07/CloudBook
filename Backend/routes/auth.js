@@ -53,4 +53,45 @@ router.post('/createuser',[
     }
   })
 
+
+  //Autenticate a user using POST: "api/auth/login"
+  router.post('/createuser',[
+    body('email','Enter a valid email').isEmail(),
+    body('password','Password should not be blank').exists(),
+  ] , async (req, res) => {
+
+    //If there are errors then return 400 bad request
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) 
+    {
+      return res.status(400).json({ errors: errors.array() });  
+    }
+
+    const {email,password} = req.body;
+
+    try {
+      let user = User.findOne({email});
+      if(!user){
+        return res.status(400).json({error: "Please try to login with correct credentials"});
+      }
+
+      const passwordCheck = bcrypt.compare(password, user.password);
+      if(!passwordCheck){
+        return res.status(400).json({error: "Please try to login with correct credentials"});
+      }
+
+      const data = {
+        userdata:{
+          id: user.id,
+        }
+      }
+      const authtoken = jwt.sign(data, JWT_SECRET);  //JWT authtoken
+  
+      res.json({authtoken});
+        
+    } catch (error) {
+      console.error(error.message);
+    }
+  })
+
   module.exports = router;
