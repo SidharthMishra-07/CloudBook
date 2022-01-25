@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'yoloforReal';
 
 
-//Create a User using POST "/api/auth/createuser". No Login Required
+//ROUTE 1: Create a User using POST "/api/auth/createuser". No Login Required
 //Taken from https://express-validator.github.io/docs/
 router.post('/createuser',[
     body('username','Enter a valid name').isLength({ min: 3 }),
@@ -52,6 +52,7 @@ router.post('/createuser',[
       
     } catch (error) {
       console.error(error.message);
+      res.status(500).send("Internal Server Error");
     }
   })
 
@@ -59,7 +60,7 @@ router.post('/createuser',[
 
 
 
-  //Autenticate a user using POST: "api/auth/login"
+  //ROUTE 2: Autenticate a user using POST: "api/auth/login" 
   router.post('/login',[
     body('email','Enter a valid email').isEmail(),
     body('password','Password should not be blank').exists(),
@@ -97,6 +98,22 @@ router.post('/createuser',[
         
     } catch (error) {
       console.error(error.message);
+      res.status(500).send("Internal Server Error");
+    }
+  })
+
+
+
+
+  //ROUTE 3: Getting the LoggedIn user details using POST: "api/auth/getuser" . Login Required
+  router.post('/getuser', async (req, res) => {
+
+    try {
+      const user = await User.findById();
+      
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Internal Server Error");
     }
   })
 
