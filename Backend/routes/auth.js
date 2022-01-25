@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = 'yoloforReal';
 
+
 //Create a User using POST "/api/auth/createuser". No Login Required
 //Taken from https://express-validator.github.io/docs/
 router.post('/createuser',[
@@ -39,6 +40,7 @@ router.post('/createuser',[
       password: secPass,
     })
 
+    //For Auth token
     const data = {
       userdata:{
         id: user.id,
@@ -52,6 +54,9 @@ router.post('/createuser',[
       console.error(error.message);
     }
   })
+
+
+
 
 
   //Autenticate a user using POST: "api/auth/login"
@@ -80,6 +85,7 @@ router.post('/createuser',[
         return res.status(400).json({error: "Please try to login with correct credentials"});
       }
 
+      //For Auth Token
       const data = {
         userdata:{
           id: user.id,
