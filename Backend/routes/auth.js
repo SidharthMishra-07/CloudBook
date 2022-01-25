@@ -6,7 +6,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fetchUser = require('../middleware/fetchUser');
 
-const JWT_SECRET = 'yoloforReal';
 
 
 //ROUTE 1: Create a User using POST "/api/auth/createuser". No Login Required
@@ -87,13 +86,13 @@ router.post('/createuser',[
         return res.status(400).json({error: "Please try to login with correct credentials"});
       }
 
-      //For Auth Token
+      //For JWT authToken
       const data = {
         userdata:{
           id: user.id,
         }
       }
-      const authtoken = jwt.sign(data, JWT_SECRET);  //JWT authtoken
+      const authtoken = jwt.sign(data, process.env.JWT_SECRET);  //JWT authtoken
   
       res.json({authtoken});
         
