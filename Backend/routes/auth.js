@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fetchUser = require('../middleware/fetchUser');
 
+const JWT_SECRET = 'yoloforReal';
 
 
 //ROUTE 1: Create a User using POST "/api/auth/createuser". No Login Required
@@ -42,7 +43,7 @@ router.post('/createuser',[
 
     //For Auth token
     const data = {
-      userdata:{
+      user:{
         id: user.id,
       }
     }
@@ -88,11 +89,11 @@ router.post('/createuser',[
 
       //For JWT authToken
       const data = {
-        userdata:{
+        user:{
           id: user.id,
         }
       }
-      const authtoken = jwt.sign(data, process.env.JWT_SECRET);  //JWT authtoken
+      const authtoken = jwt.sign(data, JWT_SECRET);  //JWT authtoken
   
       res.json({authtoken});
         
@@ -109,9 +110,10 @@ router.post('/createuser',[
   router.post('/getuser', fetchUser , async (req, res) => {
 
     try {
-      userId = req.user.id
-      const user = await User.findById(userID).select("-password");
-      
+      userId = req.user.id;
+      const user = await User.findById(userId).select("-password");
+      res.send(user);
+
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Internal Server Error");
