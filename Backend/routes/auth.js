@@ -4,6 +4,7 @@ const router = express.Router();
 const { body, validationResult } = require('express-validator');  //using express-validator
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const fetchUser = require('../middleware/fetchUser');
 
 const JWT_SECRET = 'yoloforReal';
 
@@ -106,10 +107,11 @@ router.post('/createuser',[
 
 
   //ROUTE 3: Getting the LoggedIn user details using POST: "api/auth/getuser" . Login Required
-  router.post('/getuser', async (req, res) => {
+  router.post('/getuser', fetchUser , async (req, res) => {
 
     try {
-      const user = await User.findById();
+      userId = req.user.id
+      const user = await User.findById(userID).select("-password");
       
     } catch (error) {
       console.error(error.message);
