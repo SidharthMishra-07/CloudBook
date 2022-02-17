@@ -14,7 +14,7 @@ const JWT_SECRET = 'yoloforReal';
 router.post('/createuser',[
     body('username','Enter a valid name').isLength({ min: 3 }),
     body('email','Enter a valid email').isEmail(),
-    body('password','Enter a strong password(min 5 characters)').isLength({ min: 5 }),
+    body('password','Enter a strong password (min 5 characters)').isLength({ min: 5 }),
 
 ] , async (req, res) => {
     //If there are errors then return 400 bad request
