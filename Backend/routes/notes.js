@@ -29,7 +29,7 @@ router.post('/addnote', fetchUser, [
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const note = new Note({
+    const note = new Notes({
       title,
       description,
       user: req.user.id
