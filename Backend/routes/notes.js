@@ -44,22 +44,37 @@ router.post('/addnote', fetchUser, [
   }
 })
 
-//ROUTE 2: Fetch new notes from the User using POST "/api/notes/updatenote".
+//ROUTE 3: Update notes from the User using PUT "/api/notes/updatenote/:id".
 router.put('/updatenote/:id', fetchUser, async (req, res) => {
-  const{title, description} = req.body;
+  const { title, description } = req.body;
   const newNote = {};
-  if(title){newNote.title = title};
-  if(description){newNote.description = description};
+  if(title) {newNote.title = title};
+  if(description) {newNote.description = description};
 
-  let note = await Note.findById(req.params.id);
+  let note = await Notes.findById(req.params.id);
   if(!note){return res.status(404).send("Not Found")}
 
   if(note.user.toString() !== req.user.id){
     return res.status(401).send("Unauthorised Access");
   }
 
-  note = await Note.findByIdAndUpdate(req.params.id, {$set: newNote}, {new:true});
+  note = await Notes.findByIdAndUpdate(req.params.id, {$set: newNote}, {new:true});
   res.json({note});
+})
+
+//ROUTE 4: Delete notes from the User using DELETE "/api/notes/deletenote".
+router.delete('/deletenote/:id', fetchUser, async (req, res) => {
+  const { title, description } = req.body;
+
+  let note = await Notes.findById(req.params.id);
+  if(!note){return res.status(404).send("Not Found")}
+
+  if(note.user.toString() !== req.user.id){
+    return res.status(401).send("Unauthorised Access");
+  }
+
+  note = await Notes.findByIdAndDelete(req.params.id);
+  res.json({"Success" : "Note Deleted Successfully", note: note});
 })
 
 module.exports = router;
