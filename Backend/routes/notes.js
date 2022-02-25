@@ -57,6 +57,8 @@ router.post('/updatenote', fetchUser, async (req, res) => {
   if(note.user.toString() !== req.user.id){
     return res.status(401).send("Unauthorised Access");
   }
+
+  note = await Note.findByIdAndUpdate(req.params.id, {$set: newNote}, {new:true});
 })
 
 module.exports = router;
