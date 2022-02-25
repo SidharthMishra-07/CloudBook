@@ -51,7 +51,7 @@ router.put('/updatenote/:id', fetchUser, async (req, res) => {
   if(title){newNote.title = title};
   if(description){newNote.description = description};
 
-  const note = await Note.findById(req.params.id);
+  let note = await Note.findById(req.params.id);
   if(!note){return res.status(404).send("Not Found")}
 
   if(note.user.toString() !== req.user.id){
@@ -59,6 +59,7 @@ router.put('/updatenote/:id', fetchUser, async (req, res) => {
   }
 
   note = await Note.findByIdAndUpdate(req.params.id, {$set: newNote}, {new:true});
+  res.json({note});
 })
 
 module.exports = router;
