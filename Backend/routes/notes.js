@@ -16,7 +16,7 @@ router.get('/fetchnotes', fetchUser, async (req, res) => {
   }
 })
 
-//ROUTE 2: Fetch new notes from the User using POST "/api/notes/fetchnotes".
+//ROUTE 2: Fetch new notes from the User using POST "/api/notes/addnote".
 router.post('/addnote', fetchUser, [
   body('title', 'Enter a valid title').isLength({ min: 3 }),
   body('description', 'Description must be atleast 5 characters').isLength({ min: 5 }),
@@ -42,6 +42,11 @@ router.post('/addnote', fetchUser, [
     console.error(error.message);
     res.status(500).send("Internal Server Error");
   }
+})
+
+//ROUTE 2: Fetch new notes from the User using POST "/api/notes/updatenote".
+router.post('/updatenote', fetchUser, async (req, res) => {
+  const{title, description} = req.body;
 })
 
 module.exports = router;
