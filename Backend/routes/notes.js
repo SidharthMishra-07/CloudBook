@@ -45,13 +45,13 @@ router.post('/addnote', fetchUser, [
 })
 
 //ROUTE 2: Fetch new notes from the User using POST "/api/notes/updatenote".
-router.post('/updatenote', fetchUser, async (req, res) => {
+router.put('/updatenote/:id', fetchUser, async (req, res) => {
   const{title, description} = req.body;
   const newNote = {};
   if(title){newNote.title = title};
   if(description){newNote.description = description};
 
-  const note = Note.findById(req.params.id);
+  const note = await Note.findById(req.params.id);
   if(!note){return res.status(404).send("Not Found")}
 
   if(note.user.toString() !== req.user.id){
