@@ -10,4 +10,10 @@
     color: blue;
     font-size: 18px;
     font-weight: 800px;
+    padding-right: 80px;
+}
+.NavCol:hover{
+    color: rgb(16, 115, 165);
+    text-decoration: underline 2px rgb(24, 145, 205);
+    text-underline-offset: 5px;
 }
