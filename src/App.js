@@ -1,7 +1,7 @@
 import './App.css';
 import {
   BrowserRouter as Router,
-  Routes,
+  Switch,
   Route,
 } from "react-router-dom";
 import Navbar from './Components/Navbar';
@@ -12,15 +12,15 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/">
-            <Home />
+        <Navbar/>
+        <Switch>
+          <Route exact path="/">
+            <Home/>
           </Route>
-          <Route path="/about">
-            <About />
+          <Route exact path="/about">
+            <About/>
           </Route>
-        </Routes>
+        </Switch>
       </Router>
     </>
   );
