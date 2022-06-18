@@ -1,0 +1,14 @@
+.customNav{
+    background-color: #fcf9f9;
+    border-bottom: 1px solid #e5e5e5;
+    height: 80px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+.NavCol{
+    color: blue;
+    font-size: 18px;
+    font-weight: 800px;
+}
