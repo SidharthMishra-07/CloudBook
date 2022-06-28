@@ -1,11 +1,15 @@
 import React from "react";
-import noteContext from "./noteContext";
+import NoteContext from "./noteContext";
 
 const NoteState = (props)=>{
+    const state = {
+        "name": "Sidharth",
+        "class": "12th",
+    }
     return(
-        <NoteState.provider>
+        <NoteContext.provider value={state}>
             {props.children}
-        </NoteState.provider>
+        </NoteContext.provider>
     )
 }
 
