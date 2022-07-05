@@ -1,5 +1,4 @@
-import React, {useContext} from 'react'
-import noteContext from '../Context/notes/noteContext'
+import React from 'react'
 
 export const Home = () => {
   return (
