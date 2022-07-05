@@ -6,10 +6,27 @@
     width: 100%;
     z-index: 1;
 }
+.active1{
+    color: rgb(34, 42, 57);
+}
+.navinline{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navinline p{
+    padding-top: 18px;
+    font-weight: 500;
+    color: rgb(40, 50, 71);
+    font-family: Maax,sans-serif;
+}
+.navspace{
+    padding: 0 30px;
+}
 .NavCol{
     color: blue;
     font-size: 18px;
-    font-weight: 800px;
+    font-weight: 600;
     padding-right: 80px;
 }
 .NavCol:hover{
