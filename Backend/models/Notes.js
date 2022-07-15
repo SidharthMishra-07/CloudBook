@@ -10,7 +10,7 @@ const NotesSchema = new Schema({
         type: String,
         required: true
     },
-    subject:{
+    link:{
         type: String
     },
     description:{

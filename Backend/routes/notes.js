@@ -19,10 +19,11 @@ router.get('/fetchnotes', fetchUser, async (req, res) => {
 //ROUTE 2: Fetch new notes from the User using POST "/api/notes/addnote".
 router.post('/addnote', fetchUser, [
   body('title', 'Enter a valid title').isLength({ min: 3 }),
+  body('link', 'Enter a valid link').isLength({ min: 3 }),
   body('description', 'Description must be atleast 5 characters').isLength({ min: 5 }),
 ], async (req, res) => {
   try {
-    const { title, description } = req.body;
+    const { title, link, description } = req.body;
 
     //If there are errors then return 400 bad request
     const errors = validationResult(req);
@@ -31,6 +32,7 @@ router.post('/addnote', fetchUser, [
     }
     const note = new Notes({
       title,
+      link,
       description,
       user: req.user.id
     })
@@ -46,10 +48,11 @@ router.post('/addnote', fetchUser, [
 
 //ROUTE 3: Update notes from the User using PUT "/api/notes/updatenote/:id".
 router.put('/updatenote/:id', fetchUser, async (req, res) => {
-  const { title, description } = req.body;
+  const { title, link,  description } = req.body;
   try {
     const newNote = {};
     if (title) { newNote.title = title };
+    if (link) { newNote.link = link };
     if (description) { newNote.description = description };
 
     let note = await Notes.findById(req.params.id);
@@ -69,7 +72,7 @@ router.put('/updatenote/:id', fetchUser, async (req, res) => {
 
 //ROUTE 4: Delete notes from the User using DELETE "/api/notes/deletenote".
 router.delete('/deletenote/:id', fetchUser, async (req, res) => {
-  const { title, description } = req.body;
+  const { title, link, description } = req.body;
   try {
 
 
