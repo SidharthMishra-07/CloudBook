@@ -72,8 +72,7 @@ const NoteState = (props)=>{
                 notes[index].link = link;
                 notes[index].description = description;
                 notes[index].date = date;
-            }
-            
+            }  
         }
     }
 
