@@ -16,7 +16,7 @@ function App() {
       <NoteState>
         <Router>
           <Navbar />
-          <Alert message = "This is an Alert"/>
+          {/* <Alert message = "This is an Alert"/> */}
           <div className="container">
             <Switch>
               <Route exact path="/">

@@ -39,6 +39,7 @@ const NoteState = (props)=>{
             "_id": "62178c574272a4eddb138d663",
             "user": "61ec21c527c3783f5a2592d83",
             "title": title,
+            "link": link,
             "description": description,
             "date": date,
             "__v": 0

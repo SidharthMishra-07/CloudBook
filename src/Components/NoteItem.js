@@ -15,7 +15,7 @@ const NoteItem = (props) => {
                         <i className="far fa-edit mx-2"></i>
                     </div>                   
             </div>
-            <a href="/" className="btn btn-primary">Go There</a>
+            <a href={note.link} target="_blank" className="btn btn-primary">Go to PostLink</a>
         </div>
     )
 }
