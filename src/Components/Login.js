@@ -48,7 +48,11 @@ const Login = (props) => {
                                 <label htmlFor="password" className="form-label">Password</label>
                                 <input type="password" className="form-control" value={credentials.password} id="password" name="password" onChange={onChange} required />
                             </div>
-                            <button type="submit" className="btn btn-primary btn-block my-3">Sign In</button>
+                            <div className='d-grid gap-2 col-6 mx-auto'>
+                                <button type="submit" className="btn btn-primary btn-block my-3 btnlogin">
+                                    Sign In
+                                </button>
+                            </div>
 
                             <div className="signup">
                                 <p>Don't have an account? <Link to ="/signup">SignUp</Link></p>
