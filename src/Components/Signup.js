@@ -32,24 +32,24 @@ const Signup = () => {
     <div className='global-container my-2'>
             <div className="card login-form-signup">
                 <div className="card-body">
-                    <h1 className="card-title text-center">Sign-Up</h1>
+                    <h1 className="card-title text-center">SIGN-UP</h1>
                     <div className="card-text">
                         <form onSubmit={ handleSubmit }>
                             <div className="form-group signup-body my-3">
                                 <label htmlFor="name" className="form-label">Name </label>
-                                <input type="text" className="form-control" value={credentials.name} id="name" name="name" onChange={onChange} aria-describedby="emailHelp" required />
+                                <input type="text" className="form-control input-login" value={credentials.name} id="name" name="name" onChange={onChange} aria-describedby="emailHelp" required />
                             </div>
                             <div className="form-group signup-body my-3">
                                 <label htmlFor="email" className="form-label">Email address</label>
-                                <input type="email" className="form-control" value={credentials.email} id="email" name="email" onChange={onChange} aria-describedby="emailHelp" required />
+                                <input type="email" className="form-control input-login" value={credentials.email} id="email" name="email" onChange={onChange} aria-describedby="emailHelp" required />
                             </div>
                             <div className="form-group signup-body my-3">
                                 <label htmlFor="password" className="form-label">Password</label>
-                                <input type="password" className="form-control" value={credentials.password} id="password" name="password" onChange={onChange} minLength={5} required />
+                                <input type="password" className="form-control input-login" value={credentials.password} id="password" name="password" onChange={onChange} minLength={5} required />
                             </div>
                             <div className="form-group signup-body my-3">
                                 <label htmlFor="cpassword" className="form-label">Confirm Password</label>
-                                <input type="password" className="form-control" value={credentials.cpassword} id="cpassword" name="cpassword" onChange={onChange} minLength={5} required />
+                                <input type="password" className="form-control input-login" value={credentials.cpassword} id="cpassword" name="cpassword" onChange={onChange} minLength={5} required />
                             </div>
                             <div className='d-grid gap-2 col-6 mx-auto'>
                                 <button type="submit" className="btn btn-primary btn-block my-3 btnlogin">

@@ -16,22 +16,10 @@ form{
     margin: 20px;
     background: #1a2226;
     border-radius: 10px;
+    box-shadow: 5px 10px 8px #0db8de;
 }
 .signup-body{
     padding: 0px 20px;
-}
-input[type="text"]{
-    background: #1a2226;
-    border-color: #0db8de;
-    color: white;
-    border-radius: 10px;
-}
-input[type="text"]:focus{
-    color: white;
-    outline: none;
-    border: none;
-    background: #1a2226;
-    margin: 0;
 }
 .card-title{
     font-weight: 700;

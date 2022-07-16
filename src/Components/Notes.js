@@ -67,9 +67,9 @@ export const Notes = () => {
                 </div>
             </div>
 
-            <div className="row my-3">
+            <div className="row my-2">
                 <h2>Your Post</h2>
-                <div className="container mx-2 my-2">
+                <div className="container mx-2 my-1">
                     {notes.length === 0 && 'Start Adding Posts'}
                 </div>
                 {notes.map((note) => {

@@ -18,7 +18,7 @@ export const AddNote = () => {
     <div>
         <div className="container my-3">
         <h2 className="my-2"> Add your Post</h2>
-        <form className='my-3'>
+        <form className='my-2'>
           <div className="form-group my-2">
             <label htmlFor="title">Title</label>
             <input type="text" className="form-control" id="title" name='title' value={note.title} aria-describedby="emailHelp" placeholder="Enter Title" onChange={Onchange} minLength={5} required/>
