@@ -33,7 +33,7 @@ const Login = (props) => {
 
 
     return (
-        <div className='global-container'>
+        <div className='global-container my-5'>
             <div className="card login-form">
                 <div className="card-body">
                     <h1 className="card-title text-center">Login</h1>
@@ -51,7 +51,7 @@ const Login = (props) => {
                             <button type="submit" className="btn btn-primary btn-block my-3">Sign In</button>
 
                             <div className="signup">
-                                <p>Don't have an account? <Link to ="/signup">Sign up</Link></p>
+                                <p>Don't have an account? <Link to ="/signup">SignUp</Link></p>
                             </div>
                         </form>
                     </div>

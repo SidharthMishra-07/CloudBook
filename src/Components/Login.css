@@ -1,0 +1,36 @@
+
+.global-container{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0db8de;
+}
+form{
+    padding-top: 10px;
+    font-size: 14px;
+    margin-top: 30px;
+}
+.login-form{
+    width: 380px;
+    height: 450px;
+    margin: 20px;
+    background: #1a2226;
+    border-radius: 10px;
+}
+input[type="email"],
+input[type="password"]{
+    background: #1a2226;
+    border-color: #0db8de;
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+input[type="email"]:focus,
+input[type="password"]:focus{
+    color: white;
+    outline: none;
+    border: none;
+    background: #1a2226;
+    margin: 0;
+}
