@@ -17,11 +17,12 @@ router.post('/createuser',[
     body('password','Enter a strong password (min 5 characters)').isLength({ min: 5 }),
 
 ] , async (req, res) => {
+  let success = false;
     //If there are errors then return 400 bad request
     const errors = validationResult(req);
     if (!errors.isEmpty()) 
     {
-      return res.status(400).json({ errors: errors.array() });  
+      return res.status(400).json({ success, errors: errors.array() });  
     }
     
     //Using bcrypt.js hashing
@@ -33,7 +34,7 @@ router.post('/createuser',[
     
     let user = await User.findOne({email: req.body.email});
     if(user){
-      return res.status(400).json({error: "A user with this email already exists."})
+      return res.status(400).json({ success, error: "A user with this email already exists."})
     }
     user = await User.create({
       username: req.body.username,
@@ -48,8 +49,8 @@ router.post('/createuser',[
       }
     }
     const authtoken = jwt.sign(data, JWT_SECRET);  //JWT authtoken
-
-    res.json({authtoken});
+    success = true;
+    res.json({ success, authtoken});
       
     } catch (error) {
       console.error(error.message);
