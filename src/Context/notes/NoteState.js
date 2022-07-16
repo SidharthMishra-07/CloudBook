@@ -15,37 +15,25 @@ const NoteState = (props)=>{
         headers: {
             'Content-Type': 'application/json',
             'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFlYzIxYzUyN2MzNzgzZjVhMjU5MmQ4In0sImlhdCI6MTY0MzExODA1OX0.ypv293phzAEziKcEb-omrb6HY_Cf2xnQLWebg997zhA'
-          },
+          }
         });
         const json = await response.json();
-        console.log(json);
         setNotes(json);
     }
 
     //Add a note
     const addnote = async (title, link, description, date) => {
         //API Call
-        const response = await fetch(`${host}/api/notes/addnote`, {
-            method: 'POST', 
-            headers: {
-              'Content-Type': 'application/json',
-              'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFlYzIxYzUyN2MzNzgzZjVhMjU5MmQ4In0sImlhdCI6MTY0MzExODA1OX0.ypv293phzAEziKcEb-omrb6HY_Cf2xnQLWebg997zhA'
+        const response = await fetch(`${host}/api/notes/addnote`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFlYzIxYzUyN2MzNzgzZjVhMjU5MmQ4In0sImlhdCI6MTY0MzExODA1OX0.ypv293phzAEziKcEb-omrb6HY_Cf2xnQLWebg997zhA'
             },
-            body: JSON.stringify(title, link, description, date)
-          });
-          const json = await response.json();
-          console.log(json);
+        body: JSON.stringify({title, link, description, date})
+        });
 
-        console.log("Adding a note");
-        const note ={
-            "_id": "62178c574272a4eddb138d663",
-            "user": "61ec21c527c3783f5a2592d83",
-            "title": title,
-            "link": link,
-            "description": description,
-            "date": date,
-            "__v": 0
-        }
+        const note = await response.json();
         setNotes(notes.concat(note));
     }
     //Delete a note
@@ -57,10 +45,8 @@ const NoteState = (props)=>{
               'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFlYzIxYzUyN2MzNzgzZjVhMjU5MmQ4In0sImlhdCI6MTY0MzExODA1OX0.ypv293phzAEziKcEb-omrb6HY_Cf2xnQLWebg997zhA'
             }
           });
-          const json = await response.json();
-          console.log(json); 
+          const json = await response.json(); 
 
-        console.log("Deleteing the note with id" + id);
         const newNotes = notes.filter(note => note._id !== id);
         setNotes(newNotes);
     }
@@ -68,25 +54,27 @@ const NoteState = (props)=>{
     const editnote = async (id, title, link, description, date) => {
         //API Call
         const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
-            method: 'POST', 
+            method: 'PUT', 
             headers: {
               'Content-Type': 'application/json',
               'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFlYzIxYzUyN2MzNzgzZjVhMjU5MmQ4In0sImlhdCI6MTY0MzExODA1OX0.ypv293phzAEziKcEb-omrb6HY_Cf2xnQLWebg997zhA'
             },
             body: JSON.stringify({title, link, description, date})
           });
-          const json = await response.json();
-          console.log(json);  
+          const json = await response.json(); 
 
-        for (let index = 0; index < notes.length; index++) {
-            const element = notes[index];
-            if(element._id === id){
-                notes[index].title = title;
-                notes[index].link = link;
-                notes[index].description = description;
-                notes[index].date = date;
-            }  
-        }
+          let newNotes = JSON.parse(JSON.stringify(notes))
+          // Logic to edit in client
+          for (let index = 0; index < newNotes.length; index++) {
+            const element = newNotes[index];
+            if (element._id === id) {
+              newNotes[index].title = title;
+              newNotes[index].link = link; 
+              newNotes[index].description = description;
+              break; 
+            }
+          }  
+          setNotes(newNotes);
     }
 
     return(
