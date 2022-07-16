@@ -15,7 +15,7 @@ const NoteItem = (props) => {
                         <i className="far fa-edit mx-2" onClick={()=>{updateNote(note)}}></i>
                     </div>                   
             </div>
-            <a href={note.link} target="_blank" className="btn btn-primary">Go to PostLink </a>
+            <a href={note.link} target="_blank" rel ="noreferrer" className="btn btn-primary">Go to PostLink </a>
         </div>
     )
 }

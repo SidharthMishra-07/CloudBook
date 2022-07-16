@@ -1,25 +1,28 @@
 import React, { useContext, useState, useEffect, useRef } from 'react'
 import noteContext from '../Context/notes/noteContext'
 import { AddNote } from './AddNote';
-import Modal from './Modal';
 import NoteItem from './NoteItem';
 
 export const Notes = () => {
     const context = useContext(noteContext);
-    const { notes, getNotes } = context;
+    const { notes, getNotes, editnote } = context;
     useEffect(() => {
         getNotes();
         //eslint-disable-next-line
     }, [])
     const ref = useRef(null);
+    const refclose = useRef(null);
+
+    const [note, setnote] = useState({ etitle: "", elink: "", edescription: "" , edate: ""});
 
     const updateNote = (currentNote) => {
         ref.current.click();
-        setnote({etitle: currentNote.title, elink: currentNote.link, edescription: currentNote.description});
+        setnote({id: currentNote._id, etitle: currentNote.title, elink: currentNote.link, edescription: currentNote.description});
     }
-    const [note, setnote] = useState({ etitle: "", elink: "", edescription: "" , edate: ""});
     const handleClick=(e)=>{
         e.preventDefault();
+        editnote(note.id, note.etitle, note.elink, note.edescription, note.edate);
+        refclose.current.click();
     }
     const Onchange=(e)=>{
         setnote({...note,[e.target.name]: e.target.value})
@@ -57,8 +60,8 @@ export const Notes = () => {
                             </form>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Update Post</button>
+                            <button ref={refclose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button onClick={handleClick} type="button" className="btn btn-primary">Update Post</button>
                         </div>
                     </div>
                 </div>
