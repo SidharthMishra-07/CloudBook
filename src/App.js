@@ -9,6 +9,8 @@ import { Home } from './Components/Home';
 import { About } from './Components/About';
 import NoteState from './Context/notes/NoteState';
 import { Alert } from './Components/Alert';
+import Login from './Components/Login';
+import Signup from './Components/Signup';
 
 function App() {
   return (
@@ -21,6 +23,12 @@ function App() {
             <Switch>
               <Route exact path="/">
                 <Home />
+              </Route>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+              <Route exact path="/signup">
+                <Signup />
               </Route>
               <Route exact path="/about">
                 <About />
