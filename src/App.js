@@ -13,12 +13,13 @@ import Login from './Components/Login';
 import Signup from './Components/Signup';
 
 function App() {
+  const [alert, setAlert] = useState(null);
   return (
     <>
       <NoteState>
         <Router>
           <Navbar />
-          {/* <Alert message = "This is an Alert"/> */}
+          <Alert message = "This is an Alert"/>
           <div className="container">
             <Switch>
               <Route exact path="/">
