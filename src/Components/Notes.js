@@ -3,7 +3,7 @@ import noteContext from '../Context/notes/noteContext'
 import { AddNote } from './AddNote';
 import NoteItem from './NoteItem';
 
-export const Notes = () => {
+export const Notes = (props) => {
     const context = useContext(noteContext);
     const { notes, getNotes, editnote } = context;
     useEffect(() => {
@@ -18,11 +18,13 @@ export const Notes = () => {
     const updateNote = (currentNote) => {
         ref.current.click();
         setnote({ id: currentNote._id, etitle: currentNote.title, elink: currentNote.link, edescription: currentNote.description });
+        props.showAlert(`${currentNote.title} is now being edited`, 'primary');
     }
     const handleClick = (e) => {
         e.preventDefault();
         editnote(note.id, note.etitle, note.elink, note.edescription, note.edate);
         refclose.current.click();
+        props.showAlert("Updated Successfully", "success")
     }
     const Onchange = (e) => {
         setnote({ ...note, [e.target.name]: e.target.value })
@@ -30,7 +32,7 @@ export const Notes = () => {
 
     return (
         <>
-            <AddNote />
+            <AddNote showAlert={props.showAlert}/>
 
             {/* Edit Note Modal */}
             <button type="button" ref={ref} className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -73,7 +75,7 @@ export const Notes = () => {
                     {notes.length === 0 && 'Start Adding Posts'}
                 </div>
                 {notes.map((note) => {
-                    return <NoteItem key={note._id} updateNote={updateNote} note={note} />
+                    return <NoteItem key={note._id} updateNote={updateNote} showAlert={props.showAlert} note={note} />
                 })}
             </div>
         </>

@@ -5,6 +5,9 @@ function Alert(props) {
         if(word === "danger"){
             word = "Error"
         }
+        if(word === "primary"){
+            word = "Edit"
+        }
         return word
     }
     return (
