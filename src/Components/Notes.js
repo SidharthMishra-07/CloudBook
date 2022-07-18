@@ -1,13 +1,20 @@
 import React, { useContext, useState, useEffect, useRef } from 'react'
 import noteContext from '../Context/notes/noteContext'
 import { AddNote } from './AddNote';
+import { useHistory } from 'react-router-dom'
 import NoteItem from './NoteItem';
 
 export const Notes = (props) => {
     const context = useContext(noteContext);
+    let history = useHistory();
     const { notes, getNotes, editnote } = context;
     useEffect(() => {
-        getNotes();
+        if(localStorage.getItem('token')){
+            getNotes()
+        }
+        else{
+            history.push("/login")
+        }
         //eslint-disable-next-line
     }, [])
     const ref = useRef(null);
@@ -38,7 +45,7 @@ export const Notes = (props) => {
             <button type="button" ref={ref} className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Launch static backdrop modal
             </button>
-            <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">

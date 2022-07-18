@@ -1,13 +1,15 @@
-import React ,{useEffect} from 'react'
-import {Link, useLocation} from "react-router-dom";
+import React from 'react'
+import {Link, useLocation, useHistory} from "react-router-dom";
 import logo from './CloudBook3.png';
 import './Navbar.css';  
 
 const Navbar = () => {
+    let history = useHistory();
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        history.push("/login");
+    }
     let location = useLocation();
-    useEffect(() => {
-        console.log(location.pathname);
-    }, [location]);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light py-1 customNav">
@@ -28,10 +30,10 @@ const Navbar = () => {
                             <Link className={`nav-link ${location.pathname ==="/about" ? "active1":" "} NavCol`} to ="/about">About</Link>
                         </li>
                     </ul>
-                    <form className="d-flex"> 
+                    {!localStorage.getItem('token')?<form className="d-flex"> 
                         <Link className="btn btn-primary mx-2" to="/login" role="button">Login</Link>
                         <Link className="btn btn-primary mx-2" to="/signup" role="button">Signup</Link>
-                    </form>
+                    </form> : <button onClick={handleLogout} className="btn btn-primary mx-2">Logout</button>}
                 </div>
             </div>
         </nav>
